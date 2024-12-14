@@ -1,0 +1,4 @@
+# Read Me
+
+Please place any plugins you wish to be loaded in within this file.
+To configure your plugin settings, please replicate the file structure of any config files within in and they will be loaded in.

@@ -1,0 +1,41 @@
+services:
+  minecraft:
+    image: itzg/minecraft-server:latest
+    container_name: ${DOCKER_CONTAINER_NAME}
+    environment:
+      EULA: "true"
+      TYPE: PAPER
+      # PAPER_CHANNEL: "experimental"
+      VERSION: 1.21.3
+      MEMORY: 4G
+      SERVER_PORT: ${MC_PORT}
+      MAX_PLAYERS: 8
+      RCON_PASSWORD: ${RCON_PASSWORD}
+      stdin_open: "true"
+      tty: "true"
+
+      VIEW_DISTANCE: 10
+      SIMULATION_DISTANCE: 10
+
+      SEED: exampleSeed
+      DIFFICULTY: normal
+      MODE: survival
+
+      ENFORCE_WHITELIST: "true"
+      WHITELIST: |
+        YourUsername
+
+      OPS: |
+        YourUsername
+
+      ENABLE_COMMAND_BLOCK: "true"
+      SPAWN_PROTECTION: 0
+
+    ports:
+      - ${MC_PORT}:${MC_PORT}
+    volumes:
+      - mc-data:/data
+      - ./data/plugins/:/plugins/
+    restart: unless-stopped
+volumes:
+  mc-data: {}
